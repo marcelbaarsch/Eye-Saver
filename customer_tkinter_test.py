@@ -3,7 +3,7 @@ import time
 import pygame
 from tkinter import messagebox
 
-TIMER_DURATION = 1
+TIMER_DURATION = 0 #minutes
 
 pygame.init()
 pygame.mixer.music.load("powerUp.wav")
@@ -11,9 +11,9 @@ pygame.mixer.music.load("powerUp.wav")
 def show_fullscreen_message():
     fullscreen = tk.Toplevel(root)
     fullscreen.attributes("-fullscreen", True)
-    label = tk.Label(fullscreen, "Look away!")
+    label = tk.Label(fullscreen, text="Look away!")
     label.pack(fill="both", expand=True)
-    button = tk.button(fullscreen, text="Close", command=fullscreen.destory)
+    button = tk.Button(fullscreen, text="Close", command=fullscreen.withdraw)
     button.pack(pady=50)
     fullscreen.grab_set()
     pygame.init()
