@@ -3,14 +3,24 @@ import time
 import pygame
 from tkinter import messagebox
 
+TIMER_DURATION = 1
+
 pygame.init()
 pygame.mixer.music.load("powerUp.wav")
 
 def show_fullscreen_message():
-    pass
+    fullscreen = tk.Toplevel(root)
+    fullscreen.attributes("-fullscreen", True)
+    label = tk.Label(fullscreen, "Look away!")
+    label.pack(fill="both", expand=True)
+    button = tk.button(fullscreen, text="Close", command=fullscreen.destory)
+    button.pack(pady=50)
+    fullscreen.grab_set()
+    pygame.init()
+    fullscreen.mainloop()
 
 def start_timer():
-    count = int(20) * 60
+    count = int(TIMER_DURATION) * 60
     for i in range (count, 0, -1):
         minutes, seconds = divmod(i, 60)
         label['text'] = "Remaining time: {:02d}:{:02d}".format(minutes, seconds)
@@ -18,7 +28,8 @@ def start_timer():
         root.update()
 
     pygame.mixer.music.play()
-    messagebox.showinfo("Time's up!", "Look away from the computer for 1 minute")
+    #messagebox.showinfo("Time's up!", "Look away from the computer for 1 minute")
+    show_fullscreen_message()
 
 root = tk.Tk()
 root.title("Eye Saver App")
